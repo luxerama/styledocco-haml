@@ -1,5 +1,6 @@
-# General purpose utitily functions
-# =================================
+###
+General purpose utitily functions
+###
 
 path = require 'path'
 
@@ -23,3 +24,9 @@ exports.buildRootPath = (str) ->
   root += '/' unless root.slice(-1) is '/'
   root
 
+exports.splitFixtures = (haml) ->
+  # console.log '*** HAML ***', haml
+  code = haml.split 'FIXTURE:'
+
+  json : if code[1]? then JSON.parse(code[1]) else {}
+  haml : code[0]

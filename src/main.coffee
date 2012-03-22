@@ -7,11 +7,15 @@ path = require 'path'
 mkdirp   = require 'mkdirp'
 findit   = require 'findit'
 jade     = require 'jade'
+haml     = require 'ruby-haml'
 optimist = require 'optimist'
 
 langs  = require './languages'
 parser = require './parser'
 _ = require './utils'
+express = require 'express'
+server = require('./server')
+server.start express, '/../../docs/'
 
 # Configuration
 # =============
@@ -38,6 +42,23 @@ getSections = (filename) ->
   else
     sections = parser.makeSections [ { docs: data, code: '' } ]
   sections
+
+
+hamlify = (sections, cb) ->
+  _len = sections.length - 1
+  sections.forEach ( block, i )->
+    if block.haml
+      # code = block.haml.split 'FIXTURE:'
+      # console.log block.haml.split 'FIXTURE:'
+      # console.log '-----'
+      # json = if code[1]? then JSON.parse(code[1]) else {}
+      code = _.splitFixtures block.haml
+      haml code.haml, code.json, (err, html)->
+        if i is _len then cb(sections)
+        if err then throw err
+        block.docs = block.docs.replace('%HAML%', html);
+    else
+      if i is _len then cb(sections)
 
 findFile = (dir, re) ->
   return null unless fs.statSync(dir).isDirectory()
@@ -135,10 +156,16 @@ generateFile readme, { menu, sections, title: '', description: '' }
 # Generate documentation files.
 files.forEach (file) ->
   sections = getSections file
-  generateFile file, { menu, sections, title: file, description: '' }
+  sections = hamlify sections, (sects)->
+    generateFile file, { menu, sections: sects, title: file, description: '' }
 
 # Add default docs.css unless it already exists.
 cssPath = path.join options.out, 'docs.css'
 if options.overwrite or not path.existsSync cssPath
   fs.writeFileSync cssPath, fs.readFileSync path.join(options.tmpl, 'docs.css'), 'utf-8'
   console.log "styledocco: writing #{path.join options.out, 'docs.css'}"
+
+
+
+
+

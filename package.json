@@ -26,6 +26,8 @@
     "jade": "0.17.x",
     "marked": "0.2.x",
     "mkdirp": "0.x.x",
+    "ruby-haml": "0.2.x",
+    "paperboy": "0.0.3",
     "optimist": "0.x.x" },
   "devDependencies": {
     "coffee-script": "1.2.x",
