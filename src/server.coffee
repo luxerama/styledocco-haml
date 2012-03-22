@@ -1,11 +1,12 @@
-exports.start = ->
+exports.start = (options)->
   paperboy = require('paperboy')
   http = require('http')
   path = require('path')
 
-  webroot = path.join(__dirname, '../../docs')
+  # webroot = path.join(__dirname, '../../docs')
+  webroot = options.out
   console.log webroot
-  port = 3000
+  port = options.port
 
   http.createServer( (req, res)->
     ip = req.connection.remoteAddress

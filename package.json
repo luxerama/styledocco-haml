@@ -1,25 +1,25 @@
 {
-  "name": "styledocco",
-  "description": "Generate a style guide from your stylesheets.",
+  "name": "styledoccohaml",
+  "description": "Generate a style guide from your stylesheets using haml and fixtues. Provides node server to display docs. A fork of styledocco",
   "keywords": [
     "styleguide",
     "css",
+    "haml",
     "documentation" ],
-  "author": "Jacob Rask <jacob@jacobrask.net>",
-  "version": "0.2.4",
-  "homepage": "http://jacobrask.github.com/styledocco/",
+  "version": "0.0.1",
   "licenses": [
     { "type": "MIT",
-      "url": "http://github.com/jacobrask/styledocco/raw/master/LICENSE" } ],
+      "url": "http://adtaylor.mit-license.org" } ],
   "contributors": [
+    "Ad Taylor <ad@adtaylor.co.uk>"
     "Jacob Rask <jacob@jacobrask.net>",
     "Mike Brevoort <mike@brevoort.com>",
     "Jeremy Ashkenas" ],
   "engines": { "node": ">=0.4.0" },
-  "bugs": { "url": "https://github.com/jacobrask/styledocco/issues" },
+  "bugs": { "url": "https://github.com/adtaylor/styledocco/issues" },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jacobrask/styledocco.git" },
+    "url": "git://github.com/adtaylor/styledocco.git" },
   "dependencies": {
     "findit": "0.x.x",
     "highlight.js": "1.1.x",
@@ -28,10 +28,5 @@
     "mkdirp": "0.x.x",
     "ruby-haml": "0.2.x",
     "paperboy": "0.0.3",
-    "optimist": "0.x.x" },
-  "devDependencies": {
-    "coffee-script": "1.2.x",
-    "nodeunit": "0.7.x" },
-  "main": "./lib/main",
-  "bin": "./bin/styledocco"
+    "optimist": "0.x.x" }
 }

@@ -11,8 +11,9 @@ exports.trimNewLines = (str) ->
 
 # Compute the destination HTML path for an input source file path,
 # relative to the output directory.
-exports.makeDestination = (file) ->
-  path.join path.dirname(file), path.basename(file, path.extname(file)) + '.html'
+exports.makeDestination = (out, file) ->
+  console.log "DEST: ", path.join out, path.basename(file, path.extname(file)) + '.html'
+  path.join out, path.basename(file, path.extname(file)) + '.html'
 
 
 # Build a path to the documentation root.
